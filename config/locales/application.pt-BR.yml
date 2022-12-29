@@ -1,0 +1,12 @@
+pt-BR:
+  application:
+    cancel: Cancelar
+    back: Voltar
+    edit: Editar
+    destroy: Excluir
+    activate: Ativar
+    disable: Desativar
+    filter: Filtrar
+    clear: Limpar
+    search: Buscar
+    only_active: Apenas ativos

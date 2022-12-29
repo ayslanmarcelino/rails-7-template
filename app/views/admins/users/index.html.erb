@@ -1,0 +1,41 @@
+<div class="row col-md-12">
+  <h4><%= t('admins.users.components.layout.resource') %></h4>
+  <div>
+    <%= link_to(new_admins_user_path(@user), class: 'btn btn-sm btn-success pull-right mb-2') do %>
+      <i class="bi bi-plus-circle"></i>
+      <%= t('admins.users.components.layout.create') %>
+    <% end %>
+  </div>
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= t('.id') %></th>
+          <th><%= t('.email') %></th>
+          <th><%= t('.document_number') %></th>
+          <th><%= t('.name') %></th>
+          <th><%= t('.status') %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+            <td><%= CPF.new(user.person.document_number).formatted %></td>
+            <td><%= user.person.name %></td>
+            <td class="status">
+              <span class="<%= active?(user.active) %>"></span>
+            </td>
+            <td>
+              <%= link_to(edit_admins_user_path(user), class: 'btn btn-sm') do %>
+                <i class="bi bi-pencil-square"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

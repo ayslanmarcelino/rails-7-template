@@ -1,0 +1,9 @@
+pt-BR:
+  admins:
+    users:
+      index:
+        id: Código
+        email: E-mail
+        document_number: CPF
+        name: Nome completo
+        status: Status

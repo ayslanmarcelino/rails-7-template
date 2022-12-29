@@ -1,0 +1,13 @@
+pt-BR:
+  admins:
+    users:
+      components:
+        layout:
+          resource: Usuários
+          show: Você está visualizando o(a) usuário(a)
+          new: Novo(a) usuário(a)
+          edit: "Você está editando o(a) usuário(a): %{name}"
+          create: Criar usuário
+          update: Editar usuário
+          activate_confirm: Você deseja ativar o(a) usuário(a)
+          disable_confirm: Você deseja desativar o(a) usuário(a)
