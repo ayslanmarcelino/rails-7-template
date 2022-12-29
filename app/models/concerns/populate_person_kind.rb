@@ -6,6 +6,6 @@ module PopulatePersonKind
   end
 
   def populate_person_kind
-    self.person.kind = self.class.name
+    person.kind = self.class.name
   end
 end

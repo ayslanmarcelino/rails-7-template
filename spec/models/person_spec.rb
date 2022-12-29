@@ -72,14 +72,5 @@ RSpec.describe Person, type: :model do
         expect(subject.errors.full_messages.to_sentence).to eq('CPF não pode ficar em branco')
       end
     end
-
-    context 'when do not pass kind' do
-      let(:kind) {}
-
-      it do
-        expect(subject).not_to be_valid
-        expect(subject.errors.full_messages.to_sentence).to eq('Tipo não pode ficar em branco')
-      end
-    end
   end
 end

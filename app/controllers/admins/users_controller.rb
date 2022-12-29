@@ -43,7 +43,7 @@ module Admins
             .permit(User.permitted_params,
                     person_attributes: [
                       Person.permitted_params,
-                      address_attributes: Address.permitted_params
+                      { address_attributes: Address.permitted_params }
                     ])
     end
 
@@ -57,10 +57,8 @@ module Admins
     end
 
     def verify_password
-      if params[:user].present?
-        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-          params[:user].extract!(:password, :password_confirmation)
-        end
+      if params[:user].present? && (params[:user][:password].blank? && params[:user][:password_confirmation].blank?)
+        params[:user].extract!(:password, :password_confirmation)
       end
     end
   end
