@@ -5,6 +5,7 @@
 #  id                               :bigint           not null, primary key
 #  birth_date                       :date
 #  cell_number                      :string
+#  deleted_at                       :datetime
 #  document_number                  :string
 #  identity_document_issuing_agency :string
 #  identity_document_number         :string
@@ -21,6 +22,7 @@
 # Indexes
 #
 #  index_people_on_address_id  (address_id)
+#  index_people_on_deleted_at  (deleted_at)
 #
 # Foreign Keys
 #
