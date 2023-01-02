@@ -6,6 +6,7 @@
 #  city         :string
 #  complement   :string
 #  country      :string
+#  deleted_at   :datetime
 #  neighborhood :string
 #  number       :integer
 #  state        :string
@@ -14,7 +15,13 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
+# Indexes
+#
+#  index_addresses_on_deleted_at  (deleted_at)
+#
 class Address < ApplicationRecord
+  acts_as_paranoid
+
   STATES = [:AC, :AL, :AM, :AP, :BA, :CE, :DF, :ES, :GO, :MA, :MG, :MS, :MT, :PA,
             :PB, :PE, :PI, :PR, :RJ, :RN, :RS, :RO, :RR, :SC, :SE, :SP, :TO].freeze
   COUNTRIES = [:Brasil].freeze
