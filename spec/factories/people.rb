@@ -9,7 +9,6 @@ FactoryBot.define do
     identity_document_number { FFaker.numerify('#########') }
     identity_document_issuing_agency { 'SSP' }
     marital_status { 'single' }
-    kind { 'user' }
     birth_date { Date.today - 18.years }
 
     association :address

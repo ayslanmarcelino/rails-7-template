@@ -4,6 +4,8 @@ FactoryBot.define do
     password { FFaker::Internet.password }
     active { true }
 
-    person { create(:person, kind: 'user') }
+    before :create do |resource|
+      resource.person = create(:person, owner: resource)
+    end
   end
 end
