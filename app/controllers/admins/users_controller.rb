@@ -2,7 +2,7 @@
 
 module Admins
   class UsersController < ApplicationController
-    before_action :user, only: [:edit, :update]
+    before_action :user, only: [:edit, :update, :destroy]
     before_action :verify_password, only: [:update]
 
     def index
@@ -36,7 +36,13 @@ module Admins
       end
     end
 
-    def destroy; end
+    def destroy
+      if @user.destroy
+        redirect_success(path: admins_users_path, action: 'excluído(a)')
+      else
+        render(:index)
+      end
+    end
 
     private
 
