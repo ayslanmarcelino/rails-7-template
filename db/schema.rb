@@ -39,14 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_213331) do
     t.string "identity_document_number"
     t.string "identity_document_issuing_agency"
     t.string "marital_status"
-    t.string "kind"
     t.date "birth_date"
+    t.string "owner_type"
+    t.bigint "owner_id"
     t.bigint "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["address_id"], name: "index_people_on_address_id"
     t.index ["deleted_at"], name: "index_people_on_deleted_at"
+    t.index ["owner_type", "owner_id"], name: "index_people_on_owner"
   end
 
   create_table "users", force: :cascade do |t|

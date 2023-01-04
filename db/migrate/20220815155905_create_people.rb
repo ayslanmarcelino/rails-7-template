@@ -10,9 +10,9 @@ class CreatePeople < ActiveRecord::Migration[7.0]
       t.string :identity_document_number
       t.string :identity_document_issuing_agency
       t.string :marital_status
-      t.string :kind
       t.date :birth_date
 
+      t.references :owner, polymorphic: true
       t.references :address, foreign_key: true
 
       t.timestamps
