@@ -31,8 +31,6 @@
 #  fk_rails_...  (person_id => people.id)
 #
 class User < ApplicationRecord
-  include PopulatePersonKind
-
   acts_as_paranoid
 
   # Include default devise modules. Others available are:
@@ -40,7 +38,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :person, dependent: :destroy
+  belongs_to :person, dependent: :destroy, optional: true
 
   accepts_nested_attributes_for :person
 

@@ -18,6 +18,7 @@ module Admins
 
     def create
       @user = User.new(user_params)
+      @user.person.owner = @user
 
       if @user.save
         redirect_success(path: admins_users_path, action: 'criado(a)')
