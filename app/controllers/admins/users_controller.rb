@@ -35,7 +35,7 @@ module Admins
         render(:edit, status: :unprocessable_entity)
       end
     end
-    
+
     def destroy; end
 
     private
