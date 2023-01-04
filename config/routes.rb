@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get 'dashboard/index'
 
   namespace :admins do
-    resources :users, only: [:index, :new, :create, :edit, :update]
+    resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 end
