@@ -23,7 +23,7 @@ module UserServices
     def find!
       return unless ensure_person_has_one_user!
 
-      raise("Pessoa já possui um usuário cadastrado com o e-mail: #{@person.user.email}")
+      raise("Pessoa já possui um usuário cadastrado com o e-mail: #{@person.owner.email}")
     end
 
     def ensure_person_has_one_user!
@@ -31,7 +31,7 @@ module UserServices
     end
 
     def person
-      PersonServices::Create.call(params: @person)
+      PersonServices::Create.call(person: @person)
     end
   end
 end

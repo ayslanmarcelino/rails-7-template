@@ -36,9 +36,11 @@ class Person < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :address, optional: true, dependent: :destroy
-  belongs_to :owner, polymorphic: true
+  belongs_to :owner, polymorphic: true, optional: true
 
   accepts_nested_attributes_for :address
+
+  has_one :user
 
   validates :document_number, uniqueness: { scope: :owner_type }, if: -> { document_number.present? }
   validates :document_number, presence: true
