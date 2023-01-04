@@ -9,5 +9,4 @@ pt-BR:
           edit: "Você está editando o(a) usuário(a): %{name}"
           create: Criar usuário
           update: Editar usuário
-          activate_confirm: Você deseja ativar o(a) usuário(a)
-          disable_confirm: Você deseja desativar o(a) usuário(a)
+          delete_confirm: Você deseja excluir o(a) usuário(a)

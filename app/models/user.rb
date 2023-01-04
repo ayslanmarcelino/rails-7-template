@@ -6,6 +6,7 @@
 #  active                 :boolean          default(TRUE)
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
+#  deleted_at             :datetime
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  last_sign_in_at        :datetime
@@ -20,6 +21,7 @@
 #
 # Indexes
 #
+#  index_users_on_deleted_at            (deleted_at)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_person_id             (person_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
@@ -31,12 +33,14 @@
 class User < ApplicationRecord
   include PopulatePersonKind
 
+  acts_as_paranoid
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :person
+  belongs_to :person, dependent: :destroy
 
   accepts_nested_attributes_for :person
 
