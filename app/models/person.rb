@@ -31,6 +31,8 @@
 class Person < ApplicationRecord
   IDENTITY_DOCUMENT_TYPES = [:RG, :RNE].freeze
 
+  acts_as_paranoid
+
   belongs_to :address, optional: true
 
   accepts_nested_attributes_for :address
