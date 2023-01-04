@@ -10,19 +10,21 @@
 #  identity_document_issuing_agency :string
 #  identity_document_number         :string
 #  identity_document_type           :string
-#  kind                             :string
 #  marital_status                   :string
 #  name                             :string
 #  nickname                         :string
+#  owner_type                       :string
 #  telephone_number                 :string
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
 #  address_id                       :bigint
+#  owner_id                         :bigint
 #
 # Indexes
 #
 #  index_people_on_address_id  (address_id)
 #  index_people_on_deleted_at  (deleted_at)
+#  index_people_on_owner       (owner_type,owner_id)
 #
 # Foreign Keys
 #
@@ -31,34 +33,20 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
-  subject { described_class.new(document_number: document_number, kind: kind) }
+  subject { described_class.new(document_number: document_number, owner: owner) }
 
-  let(:document_number) { CNPJ.generate }
-  let(:kind) { 'user' }
+  let!(:document_number) { CPF.generate }
+  let!(:owner) { create(:user) }
 
   context 'when sucessful' do
-    context 'when has person with same document_number' do
-      let!(:person) { create(:person, kind: 'other_kind', document_number: document_number) }
-
-      context 'when has same kind' do
-        it do
-          expect(subject).to be_valid
-        end
-      end
-    end
-
-    context 'when does not have same document_number with same kind' do
-      let!(:person) { create(:person, kind: kind) }
-
-      it do
-        expect(subject).to be_valid
-      end
+    context 'when there is no person with the same document_number and owner_type' do
+      it { expect(subject).to be_valid }
     end
   end
 
   context 'when unsucessful' do
-    context 'when has person with same document_number and kind' do
-      let!(:person) { create(:person, document_number: document_number, kind: kind) }
+    context 'when has person with same document_number and owner_type' do
+      let!(:person) { create(:person, document_number: document_number, owner_type: owner.class) }
 
       it do
         expect(subject).not_to be_valid

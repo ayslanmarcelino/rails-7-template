@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe PersonServices::Create, type: :service do
-  subject { described_class.new(params: params) }
+  subject { described_class.new(person: params) }
 
+  let!(:user) { create(:user) }
   let!(:address) { create(:address) }
 
   let(:params) do
@@ -16,7 +17,7 @@ RSpec.describe PersonServices::Create, type: :service do
       identity_document_number: FFaker.numerify('#########'),
       identity_document_issuing_agency: 'SSP',
       marital_status: 'single',
-      kind: 'user',
+      owner: user,
       birth_date: Date.today - 18.years,
       address_id: address.id
     }
@@ -39,7 +40,7 @@ RSpec.describe PersonServices::Create, type: :service do
       expect(person.identity_document_number).to eq(params[:identity_document_number])
       expect(person.identity_document_issuing_agency).to eq(params[:identity_document_issuing_agency])
       expect(person.marital_status).to eq(params[:marital_status])
-      expect(person.kind).to eq(params[:kind])
+      expect(person.owner).to eq(params[:owner])
       expect(person.birth_date).to eq(params[:birth_date])
       expect(person.address_id).to eq(params[:address_id])
     end
@@ -52,28 +53,21 @@ RSpec.describe PersonServices::Create, type: :service do
       end
 
       context 'when person exists' do
-        let!(:person) { create(:person, document_number: params[:document_number], kind: kind) }
+        let!(:person) { create(:person, document_number: params[:document_number], owner: owner) }
 
-        context 'when person has not same kind' do
-          let!(:kind) { 'client' }
+        context 'when person has not same owner' do
+          let!(:owner) { create(:address) }
 
           it_behaves_like 'it creates a person'
         end
 
-        context 'when person has same kind' do
-          let!(:kind) { 'user' }
+        context 'when person has same owner' do
+          let!(:owner) { user }
 
-          context 'when person has same enterprise' do
-            it 'returns existing person' do
-              expect do
-                subject.call
-              end.to change { Person.count }.by(0)
-
-              created_person = subject.call
-
-              expect(created_person.document_number).to eq(params[:document_number])
-              expect(created_person.kind).to eq(params[:kind])
-            end
+          it 'returns existing person' do
+            expect do
+              subject.call
+            end.to raise_exception(ActiveRecord::RecordInvalid)
           end
         end
       end

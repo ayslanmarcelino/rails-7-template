@@ -53,7 +53,7 @@ RSpec.describe UserServices::Create, type: :service do
           expect do
             subject.call
           end.to change { User.count }.by(0)
-            .and raise_error("Pessoa já possui um usuário cadastrado com o e-mail: #{person.user.email}")
+            .and raise_error("Pessoa já possui um usuário cadastrado com o e-mail: #{person.owner.email}")
         end
       end
     end

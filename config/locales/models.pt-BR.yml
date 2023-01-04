@@ -12,7 +12,7 @@
         complement: Complemento
       person:
         document_number: CPF
-        kind: Tipo
+        owner: Tipo
         birth_date: Data de nascimento
         cell_number: Celular
         identity_document_issuing_agency: Órgão expedidor
