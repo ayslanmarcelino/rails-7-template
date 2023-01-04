@@ -32,6 +32,14 @@
               <%= link_to(edit_admins_user_path(user), class: 'btn btn-sm') do %>
                 <i class="bi bi-pencil-square"></i>
               <% end %>
+              <%= link_to(admins_user_path(user),
+                          data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "#{t('admins.users.components.layout.delete_confirm')}: #{user.person.name}?"
+                          },
+                          class: 'btn btn-sm -danger') do %>
+                <i class="bi bi-trash"></i>
+              <% end %>
             </td>
           </tr>
         <% end %>
