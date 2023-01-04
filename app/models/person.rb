@@ -33,7 +33,7 @@ class Person < ApplicationRecord
 
   acts_as_paranoid
 
-  belongs_to :address, optional: true
+  belongs_to :address, optional: true, dependent: :destroy
 
   accepts_nested_attributes_for :address
 

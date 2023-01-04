@@ -40,7 +40,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :person
+  belongs_to :person, dependent: :destroy
 
   accepts_nested_attributes_for :person
 
